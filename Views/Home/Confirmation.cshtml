@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Confirmation";
+}
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width" />
+    <title>Confirmation</title>
+</head>
+<body>
+    <h1>Voici la confirmation</h1>
+    <h4>@{ @Html.Encode(ViewData["nom"]) } </h4>
+    <h3>Votre numero de confirmation est :</h3>
+    <h4>@{ @Html.Encode(ViewData["numeroconfirmation"]) } </h4>
+
+
+
+</body>
+</html>

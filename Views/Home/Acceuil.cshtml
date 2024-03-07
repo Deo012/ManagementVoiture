@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Acceuil";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab1</title>
+    
+    @Styles.Render("~/Content/style.css")
+</head>
+<body>
+    <div class="titrePage">
+    
+        <nav>
+            <div class="container nav-container">
+                <a href="" class="logo"><h1>Dream Cars</h1></a>
+            </div>
+        </nav>
+        <a @{ @Html.ActionLink("Commander", "Commander", "Home")  ; } </a>
+
+    </div>
+
+</body>
+</html>
+    

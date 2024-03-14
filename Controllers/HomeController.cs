@@ -13,10 +13,20 @@ namespace LabMVC.Controllers
         {
             return View("Acceuil");
         }
+        public ActionResult Cataloge()
+        {
+            return View("Cataloge");
+        }
 
         public ActionResult Commander()
         {
             return View("Commander");
+        }
+        public ActionResult ListeVoiture()
+        {
+            VoitureDAO voitureDAO = new VoitureDAO();
+            List<VoitureVO> voitures = voitureDAO.recupererVoitures();
+            return View("ListeVoiture", voitures);
         }
 
         public ActionResult Confirmation(string TxtNom)

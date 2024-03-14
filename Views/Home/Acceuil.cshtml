@@ -7,7 +7,7 @@
 <head>
     <title>Lab1</title>
     
-    @Styles.Render("~/Content/style.css")
+    
 </head>
 <body>
     <div class="titrePage">
@@ -18,6 +18,7 @@
             </div>
         </nav>
         <a @{ @Html.ActionLink("Commander", "Commander", "Home")  ; } </a>
+        <a @{ @Html.ActionLink("Liste Voiture", "Cataloge", "Home")}</a>
 
     </div>
 

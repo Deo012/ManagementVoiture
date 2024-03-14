@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LabMVC.Models
 {
-    class ClientVO
+    public class ClientVO
     {
         #region Variables et Objets de Cours
         /// <summary>

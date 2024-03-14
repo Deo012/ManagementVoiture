@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "ListeVoiture";
+}
+
+@model List<LabMVC.Models.VoitureVO>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste Voiture</title>
+    <link href="~/Content/styleListeVoiture.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    @foreach (var voiture in Model)
+    {
+        <div class="card">
+            <img src="@voiture.UrlImage." alt="Avatar" style="width:100%">
+            <div class="container">
+                <h4><b>@voiture.NomVoiture</b></h4>
+                <p>@voiture.Description</p>
+                <div class="buttom-card">
+                    <p>@voiture.Prix $</p>
+                    @Html.ActionLink("Acheter", "Commander", "Home")
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>

@@ -1,7 +1,37 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .container {
+            margin-top: 50px;
+            opacity: unset;
+            transition: opacity 0.5s ease; 
+        }
 
-<p>Use this area to provide additional information.</p>
+            .container:hover {
+                opacity: 0.8; 
+            }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+        <h3>@ViewBag.Message</h3>
+        <p>Use this area to provide additional information.</p>
+    </div>
+</body>
+</html>

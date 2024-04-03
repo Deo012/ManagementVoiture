@@ -11,21 +11,28 @@
 <head>
     <title>Liste Voiture</title>
     <link href="~/Content/styleListeVoiture.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </head>
-<body>
-    @foreach (var voiture in Model)
-    {
-        <div class="card">
-            <img src="@voiture.UrlImage." alt="Avatar" style="width:100%">
-            <div class="container">
-                <h4><b>@voiture.NomVoiture</b></h4>
-                <p>@voiture.Description</p>
-                <div class="buttom-card">
-                    <p>@voiture.Prix $</p>
-                    @Html.ActionLink("Acheter", "Commander", "Home")
+<body class="body1">
+    <div class="container-fluid row">
+        @foreach (var voiture in Model)
+        {
+            <div class=" card col m-2 w-5 h-5 mb-8 ">
+                <img src="@voiture.UrlImage." alt="Avatar"  class="card-img-top ">
+
+                <div class="card-body">
+                    <h4><b>@voiture.NomVoiture</b></h4>
+                    <p>@voiture.Description</p>
+                    <div class="buttom-card">
+                        <p>@voiture.Prix $</p>
+                        @Html.ActionLink("Acheter", "Commander", "Home", new { id = voiture.IdVoiture }, null)
+                    </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
+   
 </body>
 </html>

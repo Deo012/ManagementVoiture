@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Confirmation";
 }
 
@@ -8,14 +7,65 @@
 <head runat="server">
     <meta name="viewport" content="width=device-width" />
     <title>Confirmation</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            padding: 20px;
+            
+        }
+        #div {
+            background-color: white;
+            opacity: initial;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        h4, p {
+            margin-bottom: 10px;
+        }
+
+        .confirmation-info {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Voici la confirmation</h1>
-    <h4>@{ @Html.Encode(ViewData["nom"]) } </h4>
-    <h3>Votre numero de confirmation est :</h3>
-    <h4>@{ @Html.Encode(ViewData["numeroconfirmation"]) } </h4>
-
-
-
+    <div class="container" id="div">
+        <h1>Voici la confirmation</h1>
+        <div class="confirmation-info">
+            <h4>Nom:</h4>
+            <p>@{ @Html.Encode(ViewData["nom"]) }</p>
+        </div>
+        <div class="confirmation-info">
+            <h4>Adresse:</h4>
+            <p>@{ @Html.Encode(ViewData["Adresse"]) }</p>
+        </div>
+        <div class="confirmation-info">
+            <h4>Ville:</h4>
+            <p>@{ @Html.Encode(ViewData["Ville"]) }</p>
+        </div>
+        <div class="confirmation-info">
+            <h4>Pays:</h4>
+            <p>@{ @Html.Encode(ViewData["Pays"]) }</p>
+        </div>
+        <div class="confirmation-info">
+            <h4>Téléphone:</h4>
+            <p>@{ @Html.Encode(ViewData["telephone"]) }</p>
+        </div>
+        <div class="confirmation-info">
+            <h4>Voiture commandée:</h4>
+            <p>@{ @Html.Encode(ViewData["voiture"]) }</p>
+        </div>
+        <div class="confirmation-info">
+            <h4>Numéro de confirmation:</h4>
+            <p>@{ @Html.Encode(ViewData["numeroconfirmation"]) }</p>
+        </div>
+        <div class="confirmation-info">
+            <h4>Date:</h4>
+            <p>@{ @Html.Encode(ViewData["Date"]) }</p>
+        </div>
+    </div>
 </body>
 </html>

@@ -11,6 +11,11 @@ namespace LabMVC.Controllers
     {
         public ActionResult Acceuil()
         {
+            /*
+            ClientDAO clientDAO = new ClientDAO();
+            ClientVO clientVO = new ClientVO();
+            clientVO = ClientDAO.Get;
+            */
             return View("Acceuil");
         }
         public ActionResult Cataloge()
@@ -18,10 +23,18 @@ namespace LabMVC.Controllers
             return View("Cataloge");
         }
 
-        public ActionResult Commander()
+        public ActionResult Commander(int id)
         {
-            return View("Commander");
+            if(id == null)
+            {
+                return View("Commander");
+            }
+            VoitureDAO voitureDAO = new VoitureDAO();
+            VoitureVO voitureVO = new VoitureVO();
+            voitureVO = voitureDAO.getVoitureVOById(id);
+            return View("Commander", voitureVO);
         }
+        
         public ActionResult ListeVoiture()
         {
             VoitureDAO voitureDAO = new VoitureDAO();
@@ -29,15 +42,28 @@ namespace LabMVC.Controllers
             return View("ListeVoiture", voitures);
         }
 
-        public ActionResult Confirmation(string TxtNom)
+        public ActionResult Confirmation(string TxtNomVoiture, int IdVoiture, string TxtNom, string TxtPrenom, string Adresse, string Ville, string Pays, string telephone)
         {
             ClientVO clientVO = new ClientVO();
             ClientDAO clientDAO = new ClientDAO();
 
             clientVO.NomClient = TxtNom;
+            clientVO.Prenom = TxtPrenom;
+            clientVO.Adresse = Adresse;
+            clientVO.Ville = Ville;
+            clientVO.Pays = Pays;
+            clientVO.Codepostal = telephone;
+            clientVO.VoitureCommande = IdVoiture;
             
             ViewData["numeroconfirmation"] = clientDAO.sauvegardeClient(clientVO);
             ViewData["nom"] = TxtNom;
+            ViewData["Adresse"] = Adresse;
+            ViewData["Ville"] = Ville;
+            ViewData["Pays"] = Pays;
+            ViewData["telephone"] = telephone;
+            ViewData["voiture"] = TxtNomVoiture;
+            ViewData["voitureId"] = IdVoiture;
+            ViewData["Date"] = DateTime.Now.ToString();
             return View("Confirmation");
         }
 

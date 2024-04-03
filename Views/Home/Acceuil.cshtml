@@ -6,22 +6,34 @@
 <html>
 <head>
     <title>Lab1</title>
-    
-    
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/AcceuilStyle.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="titrePage">
-    
-        <nav>
-            <div class="container nav-container">
-                <a href="" class="logo"><h1>Dream Cars</h1></a>
+    <div class="container container-fluid row opacity-100">
+
+        <div class="card mb-3 text-dark" style="border-radius: .5rem;">
+            <div class="row g-0">
+                <div class="col-md-4 gradient-custom text-center text-black"
+                     style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                    <h1 class="opacity-100">Bienvenue</h1>
+                    <p class="opacity-100">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                    </p>
+                    <div>
+                        <div class="btn btn-danger">
+                            @Html.ActionLink("Voitures", "ListeVoiture", "Home", new { @class = "nav-link" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    
+                </div>
             </div>
-        </nav>
-        <a @{ @Html.ActionLink("Commander", "Commander", "Home")  ; } </a>
-        <a @{ @Html.ActionLink("Liste Voiture", "Cataloge", "Home")}</a>
-
+        </div>
     </div>
-
 </body>
 </html>
     

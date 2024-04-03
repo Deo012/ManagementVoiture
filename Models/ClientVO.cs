@@ -21,6 +21,7 @@ namespace LabMVC.Models
         private string ville;
         private string pays;
         private string codepostal;
+        private int voitureCommande;
         #endregion
 
         #region Constructeur de Cours
@@ -52,6 +53,17 @@ namespace LabMVC.Models
             get { return this.nom; }
             set { this.nom = value; }
         }
+        public int VoitureCommande
+        {
+            get { return this.voitureCommande; }
+            set { this.voitureCommande = value; }
+        }
+
+        public string Adresse { get => adresse; set => adresse = value; }
+        public string Ville { get => ville; set => ville = value; }
+        public string Pays { get => pays; set => pays = value; }
+        public string Codepostal { get => codepostal; set => codepostal = value; }
+        public string Prenom { get => prenom; set => prenom = value; }
         #endregion
     }
 }

@@ -9,7 +9,7 @@ namespace LabMVC.Models
     public class VoitureDAO
     {
         private string dp = "System.Data.SqlClient";
-        private string cnString = "Data Source=(local)\\SQLEXPRESS;Initial Catalog=Voiture;Integrated Security=True";
+        private string cnString = "Data Source=(local)\\SQLEXPRESS;Initial Catalog=labMVC_DB;Integrated Security=True";
         private DbProviderFactory df;
         private DbConnection cn;
         private DbCommand cmdCommand;
@@ -56,6 +56,7 @@ namespace LabMVC.Models
                     {
                         VoitureVO voiture = new VoitureVO
                         {
+                            IdVoiture = reader.GetInt32(reader.GetOrdinal("idVoiture")),
                             NomVoiture = reader.GetString(reader.GetOrdinal("nomVoiture")),
                             UrlImage = reader.GetString(reader.GetOrdinal("urlImage")),
                             Description = reader.GetString(reader.GetOrdinal("description")),
@@ -71,6 +72,52 @@ namespace LabMVC.Models
                 Console.WriteLine("Error retriving cars: " + e.Message);
             }
             return voitures;
+        }
+
+        public VoitureVO getVoitureVOById(int id)
+        {
+            VoitureVO voiture = new VoitureVO();
+            try
+            {
+                df = DbProviderFactories.GetFactory(dp);
+                cn = df.CreateConnection();
+                try
+                {
+                    this.cn.ConnectionString = cnString;
+                    this.cn.Open();
+
+                    this.cmdCommand = df.CreateCommand();
+                    this.cmdCommand.Connection = this.cn;
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine("Erreur de connexion, exception: " + e.StackTrace.ToString());
+                }
+
+                string sqlQuery = "Select * from tablVoiture where idVoiture = " + id;
+
+                cmdCommand.CommandText = sqlQuery;
+                DbDataReader reader = cmdCommand.ExecuteReader();
+                
+                while (reader.Read())
+                {
+                    voiture = new VoitureVO
+                    {
+                        IdVoiture = reader.GetInt32(reader.GetOrdinal("idVoiture")),
+                        NomVoiture = reader.GetString(reader.GetOrdinal("nomVoiture")),
+                        UrlImage = reader.GetString(reader.GetOrdinal("urlImage")),
+                        Description = reader.GetString(reader.GetOrdinal("description")),
+                        Prix = reader.GetInt32(reader.GetOrdinal("prix"))
+
+                    };
+                }
+                
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error retriving cars : " + id + " " + e.Message);
+            }
+            return voiture;
         }
 
         public string Dp { get => dp; set => dp = value; }

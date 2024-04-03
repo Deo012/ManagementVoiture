@@ -21,7 +21,7 @@ namespace LabMVC.Models
         /// Chaine de connexion.
         /// </summary>
         //private string cnStr = "Data Source=(local)\\MOB-C01203;Initial Catalog=Client;Integrated Security=True";
-        private string cnStr = "Data Source=(local)\\SQLEXPRESS;Initial Catalog=Client;Integrated Security=True";
+        private string cnStr = "Data Source=(local)\\SQLEXPRESS;Initial Catalog=labMVC_DB;Integrated Security=True";
 
         /// <summary>
         /// Objet de factory.
@@ -108,15 +108,15 @@ namespace LabMVC.Models
         #endregion
         public int sauvegardeClient(ClientVO clientvo)
         {
-            
 
-            //Requête SQL qui insère tout l'information reçu en paramètre.
-                
-            cmdCommand.CommandText = "Insert Into tblClient (Nom) Values('" + clientvo.NomClient + "');";
+
+            //Requête SQL qui insère tout l'information reçu en paramètre. 
+
+            cmdCommand.CommandText = "Insert Into tblClient (Nom, prenom, adresse, ville, pays, codepostal, voitureCommande) Values('" + clientvo.NomClient + "', '" + clientvo.Prenom + "','" + clientvo.Adresse + "','" + clientvo.Ville + "','" + clientvo.Pays + "','" + clientvo.Codepostal + "','" + clientvo.VoitureCommande + "');";
             using (DbDataReader dr = cmdCommand.ExecuteReader()) ;
 
             //Retrouver le numeroClient
-            int idTrouve=0;
+            int idTrouve = 0;
             cmdCommand.CommandText = "SELECT TOP 1 * FROM tblClient ORDER BY idClient DESC";
             using (DbDataReader dr = cmdCommand.ExecuteReader())
             {
@@ -126,8 +126,51 @@ namespace LabMVC.Models
                     idTrouve = int.Parse(dr["idClient"].ToString());
                 }
             }
-            return idTrouve ;       
+            return idTrouve;
         }
-        
+        public List<ClientVO> GetClients()
+        {
+            List<ClientVO> clients = new List<ClientVO>();
+            try
+            {
+                df = DbProviderFactories.GetFactory(dp);
+
+                cn = df.CreateConnection();
+
+                cn.ConnectionString = cnStr;
+                cn.Open();
+
+                cmdCommand = df.CreateCommand();
+                cmdCommand.Connection = cn;
+
+                string sqlQuery = "Select * from tblClient";
+
+                cmdCommand.CommandText = sqlQuery;
+
+                using (DbDataReader reader = cmdCommand.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ClientVO client = new ClientVO
+                        {
+                            NomClient = reader.GetString(reader.GetOrdinal("Nom")),
+                            Prenom = reader.GetString(reader.GetOrdinal("prenom")),
+                            Adresse = reader.GetString(reader.GetOrdinal("adresse")),
+                            Ville = reader.GetString(reader.GetOrdinal("ville")),
+                            Pays = reader.GetString(reader.GetOrdinal("pays")),
+                            Codepostal = reader.GetString(reader.GetOrdinal("codepostal")),
+                            VoitureCommande = reader.GetInt32(reader.GetOrdinal("voitureCommande"))
+
+                        };
+                        clients.Add(client);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error retriving clients: " + e.Message);
+            }
+            return clients;
+        }
     }
 }
